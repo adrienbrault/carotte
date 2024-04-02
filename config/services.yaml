@@ -22,3 +22,7 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    OpenAI\Client:
+        class: OpenAI\Client
+        factory: ['@App\Infrastructure\OpenAIClientFactory', 'create']

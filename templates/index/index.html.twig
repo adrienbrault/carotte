@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello IndexController!{% endblock %}
+
+{% block body %}
+    <turbo-frame id="the_frame_id">
+        <div id="messages" {{ turbo_stream_listen('chat') }}>
+            {% for index, message in messages %}
+                {{ include('index/_message.html.twig') }}
+            {% endfor %}
+        </div>
+
+        {% embed 'index/_message.html.twig' with {message: ''} %}
+            {% block attr %}
+                id="ai_reply"
+                {{ turbo_stream_listen('ai_reply') }}
+            {% endblock %}
+        {% endembed %}
+
+        <div>
+            {{ form(form) }}
+        </div>
+    </turbo-frame>
+{% endblock %}
