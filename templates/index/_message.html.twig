@@ -1,3 +1,22 @@
-<div style="margin-bottom: 20px;" {% block attr %}{% endblock %}>
-    {{ message }}
+<div class="card" {% block attr %}{% endblock %}>
+    <div class="card-body">
+        <h5 class="card-title">
+            {% if message.role == 'assistant' %}
+                <i class="fas fa-user-tie"></i>
+            {% else %}
+                <i class="fas fa-user"></i>
+            {% endif %}
+{#            {{ name }}#}
+        </h5>
+        <p class="card-text" {% block content_attr %}{% endblock %}>
+            {% block content %}
+                {{ message.content|markdown_to_html }}
+            {% endblock %}
+        </p>
+    </div>
+    <div class="card-footer">
+        <small class="text-body-secondary" {% block footer_attr %}{% endblock %}>
+            {{ message.tokens }} tokens
+        </small>
+    </div>
 </div>

@@ -3,22 +3,40 @@
 {% block title %}Hello IndexController!{% endblock %}
 
 {% block body %}
-    <turbo-frame id="the_frame_id">
-        <div id="messages" {{ turbo_stream_listen('chat') }}>
-            {% for index, message in messages %}
-                {{ include('index/_message.html.twig') }}
-            {% endfor %}
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Chat</h1>
+
+            <div class="btn-toolbar mb-2 mb-md-0">
+                <div class="btn-group me-2">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+                </div>
+
+                <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle d-flex align-items-center gap-1">
+                    <svg class="bi"><use xlink:href="#calendar3"/></svg>
+                    This week
+                </button>
+            </div>
         </div>
 
-        {% embed 'index/_message.html.twig' with {message: ''} %}
-            {% block attr %}
-                id="ai_reply"
-                {{ turbo_stream_listen('ai_reply') }}
-            {% endblock %}
-        {% endembed %}
+        <turbo-frame id="the_frame_id">
+            <div id="messages" {{ turbo_stream_listen('chat') }}>
+                {% for index, message in messages %}
+                    {{ include('index/_message.html.twig') }}
+                {% endfor %}
+            </div>
 
-        <div>
-            {{ form(form) }}
-        </div>
-    </turbo-frame>
+            <div id="ai_reply">
+            </div>
+
+            <div>
+                {{ form_start(form) }}
+                {% for message_form in form.messages %}
+                    {{ form_widget(message_form) }}
+                {% endfor %}
+                {{ form_end(form) }}
+            </div>
+        </turbo-frame>
+    </main>
 {% endblock %}

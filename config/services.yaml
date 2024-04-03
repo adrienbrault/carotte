@@ -26,3 +26,22 @@ services:
     OpenAI\Client:
         class: OpenAI\Client
         factory: ['@App\Infrastructure\OpenAIClientFactory', 'create']
+
+    Gioni06\Gpt3Tokenizer\Gpt3TokenizerConfig:
+        class: Gioni06\Gpt3Tokenizer\Gpt3TokenizerConfig
+
+    Gioni06\Gpt3Tokenizer\Gpt3Tokenizer:
+        class: Gioni06\Gpt3Tokenizer\Gpt3Tokenizer
+        arguments:
+            $config: '@Gioni06\Gpt3Tokenizer\Gpt3TokenizerConfig'
+
+
+    twig.markdown.league_common_mark_converter_factory:
+        class: App\Infrastructure\Twig\LeagueCommonMarkConverterFactory
+        arguments:
+            - !tagged_iterator twig.markdown.league_extension
+
+    League\CommonMark\Extension\Table\TableExtension:
+        class: League\CommonMark\Extension\Table\TableExtension
+        tags:
+            - { name: twig.markdown.league_extension }
