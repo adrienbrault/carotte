@@ -1,14 +1,7 @@
 {% set collapsed = message.role == 'system' %}
 
-<div class="card" {% block attr %}{% endblock %}>
+<div class="card mb-3">
     <div class="card-body">
-        <h5 class="card-title">
-            {% if message.role == 'assistant' %}
-                <i class="fas fa-user-tie"></i>
-            {% else %}
-                <i class="fas fa-user"></i>
-            {% endif %}
-        </h5>
         <div
             class="
                 card-text
