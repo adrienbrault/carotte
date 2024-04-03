@@ -1,10 +1,10 @@
-<turbo-stream action="update" target="ai_reply_content">
+<turbo-stream action="update" target="message_{{ message_index }}_content">
     <template>
-        {{ full_message.content|markdown_to_html }}
+        {{ include('index/_message_content.html.twig', {message: full_message}) }}
     </template>
 </turbo-stream>
-<turbo-stream action="update" target="ai_reply_footer">
+<turbo-stream action="update" target="message_{{ message_index }}_footer">
     <template>
-        {{ full_message.tokens }} tokens
+        {{ include('index/_message_footer.html.twig', {message: full_message}) }}
     </template>
 </turbo-stream>

@@ -61,6 +61,15 @@ class LeagueCommonMarkConverterFactory
                 }
             }
         );
+        $converter->getEnvironment()->addRenderer(
+            FencedCode::class,
+            new class implements NodeRendererInterface {
+                public function render(Node $node, $childRenderer)
+                {
+                    return '<pre><code>' . htmlspecialchars($node->getLiteral()) . '</code></pre>';
+                }
+            }
+        );
 
         return $converter;
     }

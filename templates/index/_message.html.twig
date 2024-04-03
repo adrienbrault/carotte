@@ -1,3 +1,5 @@
+{% set collapsed = message.role == 'system' %}
+
 <div class="card" {% block attr %}{% endblock %}>
     <div class="card-body">
         <h5 class="card-title">
@@ -6,17 +8,37 @@
             {% else %}
                 <i class="fas fa-user"></i>
             {% endif %}
-{#            {{ name }}#}
         </h5>
-        <p class="card-text" {% block content_attr %}{% endblock %}>
+        <div
+            class="
+                card-text
+                {% if collapsed|default(false) %}
+                    collapse
+                {% endif %}
+            "
+            id="message_{{ message_index }}_content"
+        >
             {% block content %}
-                {{ message.content|markdown_to_html }}
+                {{ include('index/_message_content.html.twig') }}
             {% endblock %}
-        </p>
+        </div>
     </div>
     <div class="card-footer">
-        <small class="text-body-secondary" {% block footer_attr %}{% endblock %}>
-            {{ message.tokens }} tokens
+        {% if collapsed|default(false) %}
+            <button
+                class="btn btn-link"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#message_{{ message_index }}_content"
+                aria-expanded="false"
+                aria-controls="message_{{ message_index }}_content"
+            >
+                Toggle
+            </button>
+        {% endif %}
+
+        <small class="text-body-secondary" id="message_{{ message_index }}_footer">
+            {{ include('index/_message_footer.html.twig') }}
         </small>
     </div>
 </div>

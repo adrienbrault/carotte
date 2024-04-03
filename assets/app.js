@@ -1,6 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import * as bootstrap from 'bootstrap';
 
 import './bootstrap.js';
+
 /*
  * Welcome to your app's main JavaScript file!
  *
@@ -10,3 +12,13 @@ import './bootstrap.js';
 import './styles/app.css';
 
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
+
+window.addEventListener("turbo:before-stream-render", () => {
+    requestAnimationFrame(() => {
+        window.scrollTo({
+            left: 0,
+            top: document.body.scrollHeight,
+            behavior: 'instant'
+        });
+    })
+})

@@ -1,0 +1,12 @@
+{% if message.content is not null %}
+    {{ message.content|markdown_to_html }}
+{% endif %}
+
+<ul>
+    {% for tool_call in message.toolCalls %}
+        <li>Call: {{ tool_call.name }} : {{ tool_call.arguments|json_encode }}</li>
+    {% endfor %}
+    {% for tool_response in message.toolResponses %}
+        <li>Response: {{ tool_response.name }} : {{ tool_response.content|json_encode }}</li>
+    {% endfor %}
+</ul>

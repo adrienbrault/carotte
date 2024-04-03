@@ -14,8 +14,11 @@ class MessageType extends AbstractType
     {
         $builder
             ->add('role', HiddenType::class)
-            ->add('content', HiddenType::class)
-            ->add('tokens', HiddenType::class)
+            ->add('content', HiddenType::class, [
+                'required' => false,
+            ])
+            ->add('toolCalls', HiddenJsonType::class)
+            ->add('toolResponses', HiddenJsonType::class)
         ;
     }
 
