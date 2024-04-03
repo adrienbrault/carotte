@@ -18,7 +18,10 @@ class Message
          * @var list<array{name: string, content: mixed}>
          */
         public array $toolResponses = [],
+        public \DateTime $createdAt = new \DateTime(),
+        public ?\DateTime $completedAt = null,
     ) {
+        $this->completedAt = $this->completedAt ?? $this->createdAt;
     }
 
     public function withAddedContent(string $newContent): self
@@ -28,6 +31,8 @@ class Message
             $this->content . $newContent,
             $this->toolCalls,
             $this->toolResponses,
+            $this->createdAt,
+            new \DateTime(),
         );
     }
 
@@ -43,6 +48,8 @@ class Message
             $newContent,
             $toolCalls,
             $this->toolResponses,
+            $this->createdAt,
+            new \DateTime(),
         );
     }
 
@@ -58,6 +65,8 @@ class Message
             $this->content,
             $this->toolCalls,
             $toolResponses,
+            $this->createdAt,
+            new \DateTime(),
         );
     }
 
