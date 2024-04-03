@@ -48,13 +48,6 @@ class LeagueCommonMarkConverterFactory
             $converter->getEnvironment()->addExtension($extension);
         }
 
-        $converter->getEnvironment()->addEventListener(
-            DocumentParsedEvent::class,
-            function (DocumentParsedEvent $event) {
-                dump($event->getDocument());
-            }
-        );
-
         $converter->getEnvironment()->addRenderer(
             Table::class,
             new class(new TableRenderer()) implements NodeRendererInterface {
