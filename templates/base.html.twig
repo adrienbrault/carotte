@@ -26,15 +26,34 @@
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu" aria-label="Close"></button>
                     </div>
 
-                    <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
-                        <ul class="nav flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="#">
-                                    Chat
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                    {% set nav_items = [
+                        {
+                            label: 'Chat',
+                            route: 'app_index',
+                        },
+                        {
+                            label: 'Spreadsheet',
+                            route: 'spreadsheet',
+                        },
+                    ] %}
+
+                    {% for nav_item in nav_items %}
+                        <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a
+                                        class="
+                                            nav-link d-flex align-items-center gap-2
+                                            {% if app.current_route == nav_item.route %}active{% endif %}
+                                            "
+                                        href="{{ path(nav_item.route) }}"
+                                    >
+                                        {{ nav_item.label }}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
 
