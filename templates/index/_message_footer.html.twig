@@ -1,3 +1,10 @@
+{% set token_count = message.toArray().content|gpt_token_count %}
+{% set time = message.completedAt|date('U.u') - message.createdAt|date('U.u') %}
+
 {{ message.role }}
 -
-{{ message.toArray().content|gpt_token_count }} tokens
+{{ token_count }} tokens
+{% if time != 0 %}
+-
+<span title="{{ message.createdAt|date('H:i:s.u') }} - {{ message.completedAt|date('H:i:s.u') }}">{{ (token_count / time)|round }} tok/s</span>
+{% endif %}

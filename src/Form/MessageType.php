@@ -19,6 +19,8 @@ class MessageType extends AbstractType
             ])
             ->add('toolCalls', HiddenJsonType::class)
             ->add('toolResponses', HiddenJsonType::class)
+            ->add('createdAt', HiddenDateType::class)
+            ->add('completedAt', HiddenDateType::class)
         ;
     }
 
