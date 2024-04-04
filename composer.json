@@ -8,7 +8,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "azjezz/psl": "^2.9",
-        "cognesy/instructor-php": "^0.5.1",
+        "cognesy/instructor-php": "dev-fix-streaming as 0.5.x-dev",
         "doctrine/dbal": "^3",
         "doctrine/doctrine-bundle": "^2.12",
         "doctrine/doctrine-migrations-bundle": "^3.3",
@@ -114,5 +114,11 @@
         "symfony/phpunit-bridge": "^7.0",
         "symfony/stopwatch": "7.0.*",
         "symfony/web-profiler-bundle": "7.0.*"
-    }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/adrienbrault/instructor-php"
+        }
+    ]
 }

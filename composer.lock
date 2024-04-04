@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2537e0ab0dbe7ee4dddb37a26bdfc1e4",
+    "content-hash": "03455cb26187f5a6cc66bcf9efb8ad78",
     "packages": [
         {
             "name": "azjezz/psl",
@@ -137,16 +137,16 @@
         },
         {
             "name": "cognesy/instructor-php",
-            "version": "v0.5.1",
+            "version": "dev-fix-streaming",
             "source": {
                 "type": "git",
-                "url": "https://github.com/cognesy/instructor-php.git",
-                "reference": "b88a67128e53d49021814a96666c9351f3330e80"
+                "url": "https://github.com/adrienbrault/instructor-php.git",
+                "reference": "d639e49a987aa05db9a4f97013de793d7cae15a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cognesy/instructor-php/zipball/b88a67128e53d49021814a96666c9351f3330e80",
-                "reference": "b88a67128e53d49021814a96666c9351f3330e80",
+                "url": "https://api.github.com/repos/adrienbrault/instructor-php/zipball/d639e49a987aa05db9a4f97013de793d7cae15a2",
+                "reference": "d639e49a987aa05db9a4f97013de793d7cae15a2",
                 "shasum": ""
             },
             "require": {
@@ -173,14 +173,24 @@
             },
             "type": "library",
             "autoload": {
-                "files": [
-                    "config/autowire.php"
-                ],
                 "psr-4": {
                     "Cognesy\\Instructor\\": "src/"
-                }
+                },
+                "files": [
+                    "config/autowire.php"
+                ]
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Tests\\": "tests/",
+                    "Examples\\": "examples/",
+                    "Cognesy\\InstructorHub\\": "src-hub/",
+                    "Cognesy\\Experimental\\": "experimental/"
+                },
+                "files": [
+                    "config/hub.php"
+                ]
+            },
             "license": [
                 "MIT"
             ],
@@ -192,10 +202,9 @@
             ],
             "description": "Structured data extraction in PHP, powered by LLMs",
             "support": {
-                "issues": "https://github.com/cognesy/instructor-php/issues",
-                "source": "https://github.com/cognesy/instructor-php/tree/v0.5.1"
+                "source": "https://github.com/adrienbrault/instructor-php/tree/fix-streaming"
             },
-            "time": "2024-03-28T17:42:50+00:00"
+            "time": "2024-04-04T23:50:00+00:00"
         },
         {
             "name": "composer/semver",
@@ -12338,9 +12347,18 @@
             "time": "2024-03-03T12:36:25+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "package": "cognesy/instructor-php",
+            "version": "dev-fix-streaming",
+            "alias": "0.5.x-dev",
+            "alias_normalized": "0.5.9999999.9999999-dev"
+        }
+    ],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "cognesy/instructor-php": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
