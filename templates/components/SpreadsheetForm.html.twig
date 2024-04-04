@@ -10,5 +10,10 @@
 
     {{ form_end(form) }}
 
+    <div id="spreadsheet" {{ turbo_stream_listen('spreadsheet') }}>
+        {% set spreadsheet = form.vars.data %}
+        {{ include('components/SpreadsheetForm.spreadsheet.html.twig') }}
+    </div>
+
 
 </div>

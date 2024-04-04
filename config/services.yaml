@@ -25,7 +25,11 @@ services:
 
     OpenAI\Client:
         class: OpenAI\Client
-        factory: ['@App\Infrastructure\OpenAIClientFactory', 'create']
+        factory: ['@App\Infrastructure\LLM\OpenAIClientFactory', 'create']
+        
+    Cognesy\Instructor\Instructor:
+        class: Cognesy\Instructor\Instructor
+        factory: ['@App\Infrastructure\LLM\CognesyInstructorFactory', 'create']
 
     Gioni06\Gpt3Tokenizer\Gpt3TokenizerConfig:
         class: Gioni06\Gpt3Tokenizer\Gpt3TokenizerConfig

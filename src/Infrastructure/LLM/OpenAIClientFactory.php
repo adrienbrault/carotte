@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructure;
+namespace App\Infrastructure\LLM;
 
 use OpenAI\Client;
 use OpenAI\Factory;
