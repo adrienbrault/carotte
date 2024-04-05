@@ -11,7 +11,8 @@ class Spreadsheet
      */
     public function __construct(
         public array $columns = [],
-        public string $context = ''
+        public string $context = '',
+        public bool $autoExtract = false,
     ) {
     }
 }

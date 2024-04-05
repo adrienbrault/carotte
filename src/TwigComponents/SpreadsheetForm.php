@@ -50,11 +50,6 @@ class SpreadsheetForm extends AbstractController
                     ColumnType::TEXT
                 ),
                 new Column(
-                    'Display Name',
-                    'The user display name.',
-                    ColumnType::TEXT
-                ),
-                new Column(
                     'Comment',
                     'How does this user appears in the context',
                     ColumnType::TEXT
@@ -62,6 +57,9 @@ class SpreadsheetForm extends AbstractController
             ],
             $this->initialContext ?? ''
         );
+        if ($this->initialContext !== null) {
+            $initialSpreadsheet->autoExtract = true;
+        }
 
         return $this->createForm(SpreadsheetType::class, $initialSpreadsheet);
     }
