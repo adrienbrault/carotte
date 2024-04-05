@@ -4,16 +4,60 @@
     {{ form_start(form, {
         attr: {
             'data-action': 'live#action:prevent',
-            'data-live-action-param': 'save'
+            'data-live-action-param': 'save',
         }
     }) }}
 
-    {{ form_end(form) }}
+    {{ form_row(form.context) }}
+
+{#    <div>#}
+{#        {{ form.context.vars.data|gpt_token_count }} Tokens#}
+{#    </div>#}
 
     <div id="spreadsheet" {{ turbo_stream_listen('spreadsheet') }}>
         {% set spreadsheet = form.vars.data %}
-        {{ include('components/SpreadsheetForm.spreadsheet.html.twig') }}
+
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    {% for column_form in form.columns %}
+                        <th class="table-light align-top">
+                            <div class="input-group">
+                                {{ form_widget(column_form.name) }}
+                                {{ form_widget(column_form.type) }}
+                            </div>
+                            <div class="input-group">
+                                <button
+                                    class="btn btn-primary"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#{{ column_form.description.vars.id }}"
+                                    aria-expanded="false"
+                                    aria-controls="{{ column_form.description.vars.id }}"
+                                >
+                                    Description
+                                </button>
+                                {{ form_widget(column_form.vars.button_delete) }}
+                            </div>
+
+                            {{ form_widget(column_form.description, {attr: {class: 'collapse'}}) }}
+                        </th>
+                    {% endfor %}
+                    <th class="d-grid">
+                        {{ form_widget(form.columns.vars.button_add) }}
+                        {{ form_widget(form.extract) }}
+                    </th>
+                </thead>
+
+                <tbody id="spreadsheet_body" class="table-group-divider">
+                    {{ include('components/SpreadsheetForm.spreadsheet_body.html.twig') }}
+                </tbody>
+            </table>
+        </div>
+
     </div>
+
+    {{ form_end(form) }}
 
 
 </div>

@@ -35,34 +35,35 @@ class SpreadsheetForm extends AbstractController
     use LiveCollectionTrait;
 
     #[LiveProp]
-    public ?Spreadsheet $initialSpreadsheet = null;
+    public ?string $initialContext = null;
 
     #[LiveProp]
     public ?array $list = null;
 
     protected function instantiateForm(): FormInterface
     {
-        if (null === $this->initialSpreadsheet) {
-            $this->initialSpreadsheet = new Spreadsheet(
-                [
-                    new Column(
-                        'Package',
-                        'The name of a package.',
-                        ColumnType::TEXT
-                    ),
-                    new Column(
-                        'Version',
-                        'The package required version.',
-                        ColumnType::TEXT
-                    ),
-                ],
-                file_get_contents(
-                    __DIR__ . '/../../composer.json'
+        $initialSpreadsheet = new Spreadsheet(
+            [
+                new Column(
+                    'Username',
+                    'The username.',
+                    ColumnType::TEXT
                 ),
-            );
-        }
+                new Column(
+                    'Display Name',
+                    'The user display name.',
+                    ColumnType::TEXT
+                ),
+                new Column(
+                    'Comment',
+                    'How does this user appears in the context',
+                    ColumnType::TEXT
+                ),
+            ],
+            $this->initialContext ?? ''
+        );
 
-        return $this->createForm(SpreadsheetType::class, $this->initialSpreadsheet);
+        return $this->createForm(SpreadsheetType::class, $initialSpreadsheet);
     }
 
     #[LiveAction]
@@ -75,7 +76,7 @@ class SpreadsheetForm extends AbstractController
 //        $this->list = $this->getListWithInstructor(
         $this->list = $this->getListWithOpenAI(
             $spreadsheet,
-            'adrienbrault/nous-hermes2pro:Q4_K_M',
+            'adrienbrault/nous-hermes2pro:Q5_K_M',
             fn (?array $list) => $this->onPartialListUpdate($spreadsheet, $list)
         );
     }
@@ -126,7 +127,7 @@ class SpreadsheetForm extends AbstractController
                     'role' => 'system',
                     'content' => $this->getHermes2ProJsonPrompt(
                         encode($jsonSchema)
-                    )
+                    ) . "\nExtract information from the user message following the schema."
                 ],
                 [
                     'role' => 'user',

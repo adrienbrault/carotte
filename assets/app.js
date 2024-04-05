@@ -14,6 +14,10 @@ import './styles/app.css';
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
 
 window.addEventListener("turbo:before-stream-render", () => {
+    if (null === document.getElementById('new_message')) {
+        return;
+    }
+
     requestAnimationFrame(() => {
         window.scrollTo({
             left: 0,

@@ -6,10 +6,15 @@
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">Spreadsheet</h1>
+
+            {% set bookmarklet_url = url(app.current_route) %}
+            <a href="javascript:void(window.open('{{ bookmarklet_url }}?context='+(window.getSelection()?window.getSelection().toString():document.body.innerText)))">
+                Bookmarklet
+            </a>
         </div>
 
         <turbo-frame id="the_frame_id">
-            {{ component('SpreadsheetForm') }}
+            {{ component('SpreadsheetForm', { initialContext: app.request.query.get('context') }) }}
         </turbo-frame>
     </main>
 {% endblock %}

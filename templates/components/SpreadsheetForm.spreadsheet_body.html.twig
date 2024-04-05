@@ -1,0 +1,9 @@
+{% for row in list %}
+    <tr>
+        {% for column in spreadsheet.columns %}
+            <td>
+                {{ row[column.name]|default('') }}
+            </td>
+        {% endfor %}
+    </tr>
+{% endfor %}
