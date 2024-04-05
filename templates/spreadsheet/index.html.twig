@@ -8,7 +8,7 @@
             <h1 class="h2">Spreadsheet</h1>
 
             {% set bookmarklet_url = url(app.current_route) %}
-            <a href="javascript:void(window.open('{{ bookmarklet_url }}?context='+(window.getSelection()?window.getSelection().toString():document.body.innerText)))">
+            <a href="javascript:window.open(`{{ bookmarklet_url }}?context=${encodeURIComponent(window.getSelection().toString()?window.getSelection().toString():document.body.innerText)}`)">
                 Bookmarklet
             </a>
         </div>
