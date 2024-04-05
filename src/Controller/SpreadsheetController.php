@@ -13,7 +13,6 @@ class SpreadsheetController extends AbstractController
     #[Route('/spreadsheet', name: 'spreadsheet')]
     public function index(): Response
     {
-        return $this->render('spreadsheet/index.html.twig', [
-        ]);
+        return $this->render('spreadsheet/index.html.twig');
     }
 }
